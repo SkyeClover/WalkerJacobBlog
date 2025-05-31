@@ -7,10 +7,9 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
+    title: 'A Search Engine || Test Project',
+    description: `This is a test project to demonstrate how to create a search engine using google
+    and other tools. It is a simple project that allows you to search for anything you want.`,
     imgSrc: '/static/images/google.png',
     href: 'https://www.google.com',
   },
