@@ -7,6 +7,11 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'FDC Tracking App',
+    description: `A modern web application for AFATDS operators to manage ammunition tracking, launcher assignments, and report generation. Built with React, TypeScript, and Vite to streamline artillery operations.`,
+    href: 'https://fdc-tracking-app.vercel.app/',
+  },
+  {
     title: 'A Search Engine || Test Project',
     description: `This is a test project to demonstrate how to create a search engine using google
     and other tools. It is a simple project that allows you to search for anything you want.`,

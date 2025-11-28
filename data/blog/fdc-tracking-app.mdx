@@ -1,0 +1,198 @@
+---
+title: 'Building the FDC Tracking App: Modernizing Artillery Operations'
+date: '2025-01-15'
+tags: ['project', 'react', 'typescript', 'web-app', 'military-tech']
+draft: false
+summary: 'How I built a modern web application to streamline ammunition tracking and report generation for AFATDS operators, replacing tedious manual processes with an intuitive React-based solution.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Building the FDC Tracking App: Modernizing Artillery Operations
+
+As an FDC (Fire Direction Center) operator in the Army, I've experienced firsthand the challenges of tracking ammunition, managing launcher assignments, and generating reports. The traditional process is tedious, error-prone, and doesn't match how we actually work in the field. So I decided to build something better.
+
+The **FDC Tracking App** is a modern web application designed specifically for AFATDS (Advanced Field Artillery Tactical Data System) Operators. It streamlines the entire workflow of tracking rounds, pods, launchers, and supply vehicles—all in one intuitive interface.
+
+[Try the FDC Tracking App →](https://fdc-tracking-app.vercel.app/)
+
+## The Problem
+
+Traditional ammunition tracking in artillery operations suffers from several critical issues:
+
+- **Human error** in manual tracking leads to inaccurate reports
+- **Tedious processes** that slow down operations when speed matters
+- **Flawed reporting schemes** that don't match real-world workflows
+- **Lack of real-time visibility** into asset status and assignments
+
+When you're managing multiple BOCs (Battery Operations Centers), POCs (PLT Operations Centers), launchers, pods, and RSVs (Reload Supply Vehicles), keeping everything organized becomes a nightmare. Spreadsheets and paper logs just don't cut it.
+
+## The Solution
+
+I built a comprehensive web application that provides:
+
+- **Real-time dashboard** with overview of all assets
+- **Inventory management** for BOCs, POCs, Launchers, Pods, RSVs, and Rounds
+- **Flexible assignment system** that matches actual operational workflows
+- **Activity logging** for complete audit trails
+- **Role-based views** for BOC vs POC operators
+
+## Technology Stack
+
+I chose a modern, lightweight stack that prioritizes developer experience and performance:
+
+### Core Technologies
+- **React 18** - Modern UI framework for building interactive interfaces
+- **TypeScript** - Type-safe development to catch errors early
+- **Vite** - Lightning-fast build tool and development server
+- **Lucide React** - Clean, consistent icon library
+
+### Deployment
+- **Vercel** - Seamless hosting with continuous deployment from GitHub
+- **Client-side authentication** - Password protection for controlled access
+
+### Why This Stack?
+
+I wanted something that was:
+- **Fast to develop** - Vite's HMR (Hot Module Replacement) makes iteration instant
+- **Type-safe** - TypeScript caught countless bugs before they reached production
+- **Easy to deploy** - Vercel handles everything automatically
+- **Accessible** - No installation required, works on any device with a browser
+
+## Key Features
+
+### 1. Dashboard
+
+The dashboard provides a real-time overview of all assets with quick stats and status indicators. Different views for BOC and POC operators ensure each user sees what's relevant to their role.
+
+### 2. Inventory Management
+
+Create and manage the entire organizational structure:
+- **BOCs** (Battery Operations Center) - Top-level command units
+- **POCs** (PLT Operations Center / PLT FDC) - Platoon-level command units
+- **Launchers** - Artillery launcher systems
+- **Pods** - Containers for rounds with specified quantities
+- **RSVs** (Reload Supply Vehicles) - Vehicles that carry pods
+- **Rounds** - Individual ammunition units with configurable types
+
+### 3. Management Panel
+
+The assignment system is where the app really shines. It supports the complex relationships that exist in real operations:
+
+- **Pods → Launchers/RSVs**: Assign ammunition pods to launchers or supply vehicles
+- **RSVs → POCs/BOCs/Ammo PLT**: Assign supply vehicles to operational units
+- **Launchers → POCs**: Assign launchers to platoon operations centers
+- **POCs → BOCs**: Organize platoons under battery operations centers
+- **Tasks**: Create and assign tasks to launchers or POCs (POC-level tasks affect all launchers in the POC)
+
+### 4. Activity Logs
+
+Complete system-wide activity monitoring with timestamped entries, change tracking, and type classification (info, warning, error, success). Every action is logged for operational accountability.
+
+### 5. Settings & Help
+
+- First-time user guide with onboarding flow
+- Terminology reference for military-specific terms
+- User role selection (BOC or POC) for personalized views
+- Round type configuration (default: M28A1, M26, M31, M30)
+
+## Architecture Decisions
+
+### State Management with Context API
+
+I chose React's Context API over Redux or other state management libraries. For this application, Context provided everything I needed without the overhead:
+
+- Simple global state management
+- Local storage persistence for data retention
+- Optimistic updates for responsive UI
+
+The data model is hierarchical (BOC → POC → Launcher) with flexible assignments that match real-world workflows. UUID tracking ensures accurate round tracking across assignments.
+
+### Type Safety
+
+TypeScript was crucial for managing the complex data relationships. I defined comprehensive types for all entities:
+
+- BOCs, POCs, Launchers, Pods, RSVs, Rounds
+- Tasks and Task Templates
+- Log Entries
+- User Roles
+- Round Type Configurations
+
+This caught many bugs during development and makes the codebase much more maintainable.
+
+### User Experience
+
+The app includes several UX features that make it actually usable in the field:
+
+- **Role-based interface** - Different views for BOC vs POC users
+- **Onboarding flow** - Startup role modal and first-time guide
+- **Password protection** - Client-side authentication for controlled access
+- **Responsive design** - Works across different screen sizes
+
+## Development Journey
+
+### From JavaFX to Web
+
+The project actually started as a **Java 1.8.0 JavaFX application** (prototype completed 08/04/2025). But I quickly realized that a web application would be better for:
+
+- **Accessibility** - No installation required
+- **Cross-platform compatibility** - Works on any device with a browser
+- **Easier deployment** - Simple hosting and updates
+- **Modern tooling** - React ecosystem and TypeScript
+
+The evolution from desktop to web was the right call. Now operators can access it from any device, whether they're in the field or at a command post.
+
+### Key Decisions
+
+1. **Web-first approach** - Prioritized accessibility over native app
+2. **TypeScript adoption** - Type safety for complex data relationships
+3. **Context API** - Simple state management without external libraries
+4. **Vercel deployment** - Fast, free hosting with CI/CD built-in
+
+## What I Learned
+
+### What Worked Well
+
+- **TypeScript** caught many bugs early in development
+- **React Context** simplified state management without external libraries
+- **Vite** provided excellent developer experience with fast HMR
+- **Component-based architecture** made features easy to add
+
+### Challenges
+
+- **Complex data relationships** required careful type design
+- **State synchronization** across multiple components needed careful planning
+- **User onboarding** required thoughtful UX consideration
+- **Deployment configuration** needed understanding of environment variables
+
+## Future Enhancements
+
+While the app is fully functional, there's always room to grow:
+
+- **Server-side authentication** for production use
+- **Multi-user support** with proper user accounts
+- **Real-time collaboration** via WebSockets
+- **Export/Import** functionality for data portability
+- **Advanced reporting** with charts and analytics
+- **Mobile app** version for field use
+- **Offline support** with service workers
+
+## Try It Out
+
+The app is live and deployed on Vercel with password protection. You can check it out at:
+
+**[https://fdc-tracking-app.vercel.app/](https://fdc-tracking-app.vercel.app/)**
+
+The source code is available on GitHub:
+**[https://github.com/SkyeClover/FDCTrackingApp.git](https://github.com/SkyeClover/FDCTrackingApp.git)**
+
+## Conclusion
+
+Building the FDC Tracking App was a great learning experience that combined my military knowledge with my passion for software development. It's a practical solution to a real problem I face in my day-to-day work, and it demonstrates how modern web technologies can improve even the most traditional processes.
+
+The app is currently at version 1.0.1 and actively being used. If you're an FDC operator or interested in military tech applications, I'd love to hear your feedback!
+
+---
+
+*Have questions or suggestions? Feel free to reach out or check out the project on GitHub.*
+
