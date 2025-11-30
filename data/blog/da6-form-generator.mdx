@@ -14,6 +14,8 @@ Anyone who's had to create a DA6 Duty Roster knows the pain—hours spent manual
 
 The **DA6 Form Generator** is a modern web application that automates and streamlines the entire DA6 Duty Roster creation process. Built specifically for Army personnel who need to generate compliant, properly formatted duty rosters quickly and accurately.
 
+**[Try the DA6 Form Generator →](https://da6-form-generator.vercel.app/)**
+
 ## The Problem
 
 Manual DA6 form creation is a time-consuming and error-prone process that plagues unit administrators:
@@ -209,12 +211,61 @@ Using JSONB for form data provides:
 - Appointment tracking and management
 - Excluded dates functionality
 
-### Phase 4: Coming Soon 🚧
+### Phase 4: Deployment ✅
+
+- Vercel deployment configuration
+- Production environment setup
+- Environment variable management
+- CI/CD pipeline integration
+- Serverless function architecture
+- CORS and authentication configuration
+- Supabase production setup
+
+### Phase 5: Coming Soon 🚧
 
 - PDF generation with proper Army formatting
 - Form templates and presets
 - Export/import functionality
 - Advanced reporting and analytics
+
+## Deployment Story
+
+Deploying a full-stack application with React frontend and Express backend to Vercel required some interesting architectural decisions:
+
+### The Challenge
+
+Vercel is optimized for serverless functions and static sites, but our app needed:
+- A React frontend (static)
+- An Express API backend (serverless functions)
+- Database connections (Supabase)
+- Secure authentication (Google OAuth)
+
+### The Solution
+
+We configured Vercel to:
+1. **Build the React app** as static files
+2. **Convert Express routes** to serverless functions
+3. **Route API requests** through `/api/*` to serverless functions
+4. **Configure environment variables** for Supabase credentials
+5. **Set up CORS** to allow frontend-backend communication
+
+### Key Technical Decisions
+
+- **Serverless Functions**: Express app runs as Vercel serverless functions, automatically scaling
+- **Environment Variables**: Secure storage of Supabase credentials and API keys
+- **CORS Configuration**: Dynamic origin handling for production and preview deployments
+- **Build Optimization**: Separate build commands for frontend and backend
+
+### Deployment Process
+
+1. Push code to GitHub
+2. Vercel automatically detects changes
+3. Runs build process (installs dependencies, builds React app)
+4. Deploys serverless functions
+5. Serves static frontend files
+6. Routes API calls to appropriate functions
+
+The entire deployment is automated—push to main branch and Vercel handles the rest!
 
 ## Why This Matters
 
@@ -255,9 +306,34 @@ Intelligent rotation algorithms ensure fair duty distribution, tracking days sin
 - **Rank hierarchy** required accurate implementation of military rank ordering
 - **Exception code logic** needed to handle edge cases and conflicts
 
+## Getting Started
+
+The application is **live and deployed** on Vercel! Key features are fully functional and ready for testing. PDF generation and advanced templates are coming soon.
+
+**Live Application:**
+- 🌐 **Production URL**: [https://da6-form-generator.vercel.app](https://da6-form-generator.vercel.app)
+- 🔐 **Authentication**: Google OAuth (sign in with your Google account)
+- 📱 **Access**: Available on any device with a web browser
+
+**Tech Stack:**
+- **Frontend**: React 18 + React Router
+- **Backend**: Node.js + Express (deployed as Vercel serverless functions)
+- **Database**: Supabase (PostgreSQL) with Row-Level Security
+- **Authentication**: Supabase Auth with Google OAuth
+- **Hosting**: Vercel (serverless deployment)
+- **CI/CD**: Automatic deployments via GitHub integration
+
+**For Developers:**
+- Full source code available on GitHub
+- RESTful API documentation
+- Database schema with migrations
+- Comprehensive setup guides
+- Deployment guides for Vercel
+- Environment variable configuration examples
+
 ## Future Enhancements
 
-While the core features are functional, there's always room to grow:
+While the core features are functional and deployed, there's always room to grow:
 
 - **PDF generation** with proper Army DA6 formatting
 - **Form templates and presets** for common scenarios
@@ -273,7 +349,9 @@ The DA6 Form Generator represents a modern solution to an age-old military admin
 
 Whether you're managing a single roster or coordinating multiple duty assignments across a unit, this tool saves time, reduces errors, and ensures compliance—letting leaders focus on what matters most: leading their soldiers.
 
-The application is currently in active development with core features functional. PDF generation and advanced templates are coming soon, making it even more powerful for unit administrators.
+The application is **live and deployed** on Vercel, ready for real-world testing and feedback from Army personnel who need to create duty rosters. PDF generation and advanced templates are coming soon, making it even more powerful for unit administrators.
+
+**[Try it out →](https://da6-form-generator.vercel.app/)**
 
 ---
 
