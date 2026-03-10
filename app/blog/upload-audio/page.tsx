@@ -37,7 +37,8 @@ export default function BlogAudioUploadPage() {
           <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
             Upload a voice recording for a post. The file is sent directly to Vercel Blob (no 4.5 MB
             limit). Then add the URL to your post frontmatter as <code>audioUrl</code>. Only you can
-            upload if you set the secret below (store it in Vercel as <code>BLOG_AUDIO_UPLOAD_SECRET</code>).
+            upload if you set the secret below (store it in Vercel as{' '}
+            <code>BLOG_AUDIO_UPLOAD_SECRET</code>).
           </p>
         </div>
 
@@ -80,7 +81,10 @@ export default function BlogAudioUploadPage() {
           }}
         >
           <div className="mb-4">
-            <label htmlFor="upload-secret" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label
+              htmlFor="upload-secret"
+              className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Upload secret
             </label>
             <input
@@ -102,12 +106,12 @@ export default function BlogAudioUploadPage() {
               accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg,audio/webm,audio/*"
               required
               disabled={uploading}
-              className="block w-full text-sm text-gray-600 file:mr-4 file:rounded-md file:border-0 file:bg-primary-500 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white file:hover:bg-primary-600 dark:text-gray-400"
+              className="file:bg-primary-500 file:hover:bg-primary-600 block w-full text-sm text-gray-600 file:mr-4 file:rounded-md file:border-0 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white dark:text-gray-400"
             />
             <button
               type="submit"
               disabled={uploading}
-              className="rounded-md bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-600 disabled:opacity-50"
+              className="bg-primary-500 hover:bg-primary-600 rounded-md px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
             >
               {uploading ? 'Uploading…' : 'Upload'}
             </button>
@@ -116,11 +120,13 @@ export default function BlogAudioUploadPage() {
             <div className="mt-4">
               <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                 <div
-                  className="h-full bg-primary-500 transition-all duration-300"
+                  className="bg-primary-500 h-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{Math.round(progress)}%</p>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                {Math.round(progress)}%
+              </p>
             </div>
           )}
         </form>
@@ -137,7 +143,7 @@ export default function BlogAudioUploadPage() {
               Use this URL in your post frontmatter:
             </p>
             <div className="flex flex-wrap items-center gap-2">
-              <code className="flex-1 break-all rounded bg-gray-200 px-2 py-1 text-sm dark:bg-gray-700">
+              <code className="flex-1 rounded bg-gray-200 px-2 py-1 text-sm break-all dark:bg-gray-700">
                 {blob.url}
               </code>
               <button
@@ -155,7 +161,10 @@ export default function BlogAudioUploadPage() {
         )}
 
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          <Link href="/blog" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+          <Link
+            href="/blog"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          >
             ← Back to blog
           </Link>
         </p>
