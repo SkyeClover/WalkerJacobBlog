@@ -109,6 +109,8 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    /** Optional URL to an audio recording (e.g. you reading the post). Shown at top of post. */
+    audioUrl: { type: 'string' },
   },
   computedFields: {
     ...computedFields,
