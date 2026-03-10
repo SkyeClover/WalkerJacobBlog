@@ -87,6 +87,10 @@ export default function BlogAudioUploadPage() {
             >
               Upload secret
             </label>
+            <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">
+              Must match <code>BLOG_AUDIO_UPLOAD_SECRET</code> in Vercel exactly (Production env).
+              Redeploy after adding or changing it.
+            </p>
             <input
               id="upload-secret"
               type="password"

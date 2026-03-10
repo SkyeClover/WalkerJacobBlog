@@ -10,7 +10,7 @@ const UPLOAD_SECRET_HEADER = 'x-blog-audio-secret'
  * only issues tokens and optionally runs onUploadCompleted.
  */
 export async function POST(request: Request): Promise<NextResponse> {
-  const secret = process.env.BLOG_AUDIO_UPLOAD_SECRET
+  const secret = process.env.BLOG_AUDIO_UPLOAD_SECRET?.trim()
   if (!secret) {
     return NextResponse.json(
       { error: 'Blog audio upload is not configured (missing BLOG_AUDIO_UPLOAD_SECRET).' },
@@ -18,9 +18,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     )
   }
 
-  const provided = request.headers.get(UPLOAD_SECRET_HEADER)
+  const provided = request.headers.get(UPLOAD_SECRET_HEADER)?.trim()
   if (provided !== secret) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json(
+      {
+        error:
+          'Unauthorized. Enter the exact value of BLOG_AUDIO_UPLOAD_SECRET from Vercel in the Upload secret field.',
+      },
+      { status: 401 }
+    )
   }
 
   const body = (await request.json()) as HandleUploadBody
