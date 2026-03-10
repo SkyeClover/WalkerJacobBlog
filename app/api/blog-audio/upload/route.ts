@@ -31,8 +31,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   // Blob token: SDK expects BLOB_READ_WRITE_TOKEN; Vercel also injects {storeName}_READ_WRITE_TOKEN
   const blobToken = (
-    process.env.BLOB_READ_WRITE_TOKEN ??
-    process.env.blog_recording_READ_WRITE_TOKEN
+    process.env.BLOB_READ_WRITE_TOKEN ?? process.env.blog_recording_READ_WRITE_TOKEN
   )?.trim()
   if (!blobToken) {
     return NextResponse.json(
@@ -48,10 +47,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     body = (await request.json()) as HandleUploadBody
   } catch {
-    return NextResponse.json(
-      { error: 'Invalid request body (expected JSON).' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Invalid request body (expected JSON).' }, { status: 400 })
   }
 
   try {
