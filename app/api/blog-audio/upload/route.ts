@@ -29,14 +29,37 @@ export async function POST(request: Request): Promise<NextResponse> {
     )
   }
 
-  const body = (await request.json()) as HandleUploadBody
+  // Blob token: SDK expects BLOB_READ_WRITE_TOKEN; Vercel also injects {storeName}_READ_WRITE_TOKEN
+  const blobToken = (
+    process.env.BLOB_READ_WRITE_TOKEN ??
+    process.env.blog_recording_READ_WRITE_TOKEN
+  )?.trim()
+  if (!blobToken) {
+    return NextResponse.json(
+      {
+        error:
+          'Vercel Blob is not connected. In Vercel Dashboard go to Storage → create/link a Blob store to this project, then redeploy.',
+      },
+      { status: 503 }
+    )
+  }
+
+  let body: HandleUploadBody
+  try {
+    body = (await request.json()) as HandleUploadBody
+  } catch {
+    return NextResponse.json(
+      { error: 'Invalid request body (expected JSON).' },
+      { status: 400 }
+    )
+  }
 
   try {
     const jsonResponse = await handleUpload({
       body,
       request,
+      token: blobToken,
       onBeforeGenerateToken: async (pathname) => {
-        // Restrict to blog-audio/ prefix and audio types only
         if (!pathname.startsWith('blog-audio/')) {
           throw new Error('Pathname must start with blog-audio/')
         }
@@ -52,16 +75,14 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
       },
       onUploadCompleted: async ({ blob }) => {
-        // Optional: log or persist the URL (e.g. to a DB). The client already gets blob.url from upload().
         console.log('Blog audio uploaded:', blob.url)
       },
     })
 
     return NextResponse.json(jsonResponse)
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : String(error) },
-      { status: 400 }
-    )
+    const message = error instanceof Error ? error.message : String(error)
+    console.error('[blog-audio/upload]', message)
+    return NextResponse.json({ error: message }, { status: 400 })
   }
 }

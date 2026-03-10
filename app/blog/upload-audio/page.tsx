@@ -88,8 +88,9 @@ export default function BlogAudioUploadPage() {
               Upload secret
             </label>
             <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">
-              Must match <code>BLOG_AUDIO_UPLOAD_SECRET</code> in Vercel exactly (Production env).
-              Redeploy after adding or changing it.
+              Must match <code>BLOG_AUDIO_UPLOAD_SECRET</code> in Vercel (Production). Redeploy after
+              changing it. If upload fails with 400, ensure a <strong>Blob store</strong> is
+              connected to this project (Vercel → Storage → link/create Blob), then redeploy.
             </p>
             <input
               id="upload-secret"
