@@ -7,7 +7,7 @@ import siteMetadata from '@/data/siteMetadata'
 export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)
 
-  if (!siteMetadata.commentsEnabled) {
+  if (!siteMetadata.commentsEnabled || !siteMetadata.comments) {
     return null
   }
   return (
