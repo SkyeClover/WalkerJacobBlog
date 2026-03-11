@@ -5,7 +5,7 @@
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "yarn",
-  "postCreateCommand": "",
+  "postCreateCommand": "yarn",
   "postAttachCommand": "yarn dev",
   "customizations": {
     "codespaces": {

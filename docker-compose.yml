@@ -1,0 +1,21 @@
+# Local development: app runs in container with hot reload.
+# Usage: docker compose up
+# Then open http://localhost:3000
+# Copy .env.example to .env.local and add Giscus keys for comments.
+
+services:
+  app:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "corepack enable yarn && yarn install && yarn dev"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    # Optional: add env_file: [.env.local] and create from .env.example for Giscus comments
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    stdin_open: true
+    tty: true

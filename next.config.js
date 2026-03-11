@@ -54,7 +54,11 @@ const securityHeaders = [
   },
 ]
 
-const output = process.env.EXPORT ? 'export' : undefined
+const output = process.env.DOCKER_BUILD
+  ? 'standalone'
+  : process.env.EXPORT
+    ? 'export'
+    : undefined
 const basePath = process.env.BASE_PATH || undefined
 const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 

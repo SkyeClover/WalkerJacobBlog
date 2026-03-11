@@ -26,7 +26,7 @@ const ScrollTopAndComment = () => {
     <div
       className={`fixed right-8 bottom-8 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
     >
-      {siteMetadata.comments?.provider && (
+      {siteMetadata.commentsEnabled && (
         <button
           aria-label="Scroll To Comment"
           onClick={handleScrollToComment}
