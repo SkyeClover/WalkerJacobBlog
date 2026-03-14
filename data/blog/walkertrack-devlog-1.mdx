@@ -1,0 +1,45 @@
+---
+title: 'Devlog #1 – WalkerTrack Development Update'
+date: '2026-03-14'
+tags: ['hobbies']
+draft: false
+summary: 'Progress update on WalkerTrack: why I’m rebuilding the FDC operations platform from the ground up, what the new architecture will fix, and what I’m working on next.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Devlog #1 – WalkerTrack Development Update
+
+WalkerTrack is the software platform I'm building to support Fire Direction Center (FDC) operations for HIMARS artillery units. The goal is simple: give 13J Fire Control Specialists a digital system to track the kind of operational data they usually write in notebooks—launchers, RSVs, POCs, BOCs, ammo, fire missions, comms status, unit posture—so it’s all in one place, up to date, and visible on a 15.6" touchscreen in the field (e.g. on Raspberry Pi in the vehicle). I also want multiple units to be able to share and sync data so no single box is a single point of failure. This devlog is a quick snapshot of where things stand and why I'm doing a full rewrite.
+
+## What I Built So Far
+
+The first version was a real prototype. I got launcher tracking, RSVs, POCs, BOCs, basic ammo and reload timelines, fire mission history, comms check-ins, and unit posture (Ready Hot, Ready, Cold, Reloading) into a working app. It was enough to validate that the workflows made sense and that a digital FDC tracker was viable. People could use it, and it proved the concept. So in terms of “did I build something useful?”—yes. But under the hood I kept running into limits.
+
+## Why I'm Rebuilding the System
+
+The prototype was built to move fast and learn. That meant some shortcuts: state and data models that got tangled as I added features, UI that wasn’t really tuned for touch and field use, and networking/sync that was more of an afterthought than a first-class design. Fixing those in place would have meant a lot of patches and workarounds. I decided it was cleaner to restart with an architecture that’s built for the real requirements from day one—modular design, field-friendly UI, proper sync, and reliable fire mission tracking—instead of bending the old codebase into shape.
+
+## What the New Architecture Will Improve
+
+The rewrite is aimed at a few concrete improvements:
+
+- **Modular architecture** – Clear separation of concerns so I can change one part (e.g. sync, or fire mission logic) without breaking everything else.
+- **Better UI for field use** – Touch targets, layout, and feedback designed for a 15.6" display and gloved hands, not just a desktop browser.
+- **Networking and sync** – Decentralized data sharing and sync between units designed in from the start, not bolted on.
+- **Fire mission tracking** – More reliable modeling and display of mission state and history.
+- **Cleaner data models** – Units, logistics, and ammo represented in a way that’s easier to reason about and extend.
+
+That’s the target. I’m not there yet, but the new codebase is being structured with these in mind.
+
+## Current Development Focus
+
+Right now the focus is on the foundation: project setup, core data models, and the first pass of the UI shell. I’m defining how launchers, RSVs, POCs, BOCs, and ammo are represented in the new system and how they relate to each other. I’m also getting the basic layout and navigation in place so I can build the main FDC views on top of it. It’s less glamorous than “new feature X,” but it’s the part that will make everything else stable and maintainable.
+
+## Upcoming Milestones
+
+Next steps are to lock in the core models and then implement the main operational views: launcher/RSV/POC/BOC status, ammo and reload timelines, and a clear fire mission history view. After that I’ll layer in comms status and check-ins, then start on the sync and networking layer so multiple systems can share data. I’m not setting hard dates yet—I’d rather get the foundation right and then move quickly on features.
+
+## Closing Thoughts
+
+Rebuilding from scratch is a big decision. The prototype did its job: it showed that the idea works and what I need to improve. The new direction is about making WalkerTrack something I can maintain and extend for real field use, with sync and reliability as core features instead of add-ons. Progress will show up in devlogs like this—what worked, what didn’t, and what I’m doing next. Thanks for following along.
