@@ -7,6 +7,11 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'Personality Matrix',
+    description: `A daily check-in app that visualizes mood and progress in a 3D matrix. Morning and evening ratings across eight dimensions, goals, diary, and optional Oura Ring integration for sleep, readiness, and steps. All data stays on your device.`,
+    href: 'https://personalitymatrix.walkerjacob.com/',
+  },
+  {
     title: 'DA6 Form Generator',
     description: `A modern web application that automates Army DA6 Duty Roster creation. Built with React, Node.js, and Supabase to eliminate hours of manual work, reduce errors, and ensure compliance with Army regulations. Features intelligent duty assignment, cross-roster checking, and rank-aware sorting.`,
     href: 'https://da6-form-generator.vercel.app/',

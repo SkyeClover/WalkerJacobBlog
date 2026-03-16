@@ -1,0 +1,49 @@
+---
+title: 'Personality Matrix App: Daily Check-In and a 3D View of Your Week'
+date: '2026-03-16'
+tags: ['development', 'project']
+draft: false
+summary: 'A web app that turns the Personality Matrix idea into a daily practice—morning and evening check-ins, eight dimensions, goals, and optional Oura Ring data, all visualized in 3D. Data stays on your device.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Personality Matrix App: Daily Check-In and a 3D View of Your Week
+
+A while back I wrote about the [Personality Matrix as a game design idea](/blog/personality-matrix-design)—a structure for emotions and traits that could shape affinities, abilities, and how characters get influenced. I wanted to see what it felt like to use that idea in a more personal, low-stakes way: not in a game, but as a **daily check-in tool** that lets you rate how you’re doing across a small set of dimensions and watch patterns over time.
+
+The result is the **Personality Matrix** app: a daily check-in that visualizes your morning and evening ratings in a 3D “matrix,” tracks goals, keeps a simple diary, and can optionally pull in sleep, readiness, and steps from an Oura Ring. Everything runs in the browser and stays on your device—no accounts, no backend storing your data.
+
+**[Try the Personality Matrix app →](https://personalitymatrix.walkerjacob.com/)**
+
+## What It Does
+
+- **Morning check-in** — Set a focus or intention for the day, add a few goals, and rate yourself from 1–5 on eight dimensions: Energy, Mood, Focus, Calm, Motivation, Gratitude, Connection, Balance. Log sleep quality and an optional note.
+- **Evening check-in** — Rate the same eight dimensions again, mark goals done, rate day satisfaction (1–5), and add an evening note.
+- **Eight dimensions** — The same set in the morning and evening so you can compare “start of day” vs “end of day” and see how you trend over the last two weeks.
+- **Goals** — Add goals in the morning and check them off in the evening. Progress view shows completion over the last 14 days.
+- **Diary** — One freeform text area per day for whatever you want to remember.
+- **Progress** — Averages per dimension (morning vs evening), goal completion, and a stats table: sleep score, readiness, steps. If you connect Oura, the app can import the last 14 days of daily sleep, readiness, and activity so you see it alongside your own ratings.
+- **3D matrix** — The atom-style visualization reflects whichever tab you’re on (morning or evening): the core is your focus, the nodes are your ratings. It’s the “inner world” idea from the design post, scaled down to a quick daily snapshot.
+
+All of that is stored locally in your browser. No sign-up, no server-side storage of your check-ins or Oura data.
+
+## Optional Oura Ring Integration
+
+If you use an Oura Ring, you can connect your account in the app. The app then imports the last 14 days of daily sleep, readiness, and steps and merges them into the Progress stats table. Connection is done via OAuth; after you authorize, the app imports once and you can refresh when you want. Tokens and Oura data are used only in your browser and are not stored on any server. The app doesn’t collect or transmit your personal data.
+
+## Tech and Privacy
+
+- **Frontend** — React, Vite, and Three.js (via React Three Fiber) for the 3D matrix. No backend for the app itself; state lives in the browser (e.g. localStorage).
+- **Oura** — Optional. If you connect, the flow uses a standard OAuth redirect and token exchange; the app only reads and displays the data you choose to import and doesn’t send it elsewhere.
+- **Privacy** — No accounts, no analytics on your check-in content, no server-side storage of Oura tokens or health data. The [privacy policy](/privacy) and [terms](/terms) for the site cover both the blog and this app.
+
+## Why Build It
+
+I wanted to make the matrix idea concrete: something you can use in a few minutes a day and see over time. The 3D view is a lightweight take on “seeing your inner state”—not a full game system, but a way to notice patterns in energy, mood, and balance. Adding Oura was a natural fit for comparing how you *feel* (the ratings) with how you *slept* and how ready you were, without tying that to any central database.
+
+The app is live at **personalitymatrix.walkerjacob.com**. If you try it and have feedback or ideas, I’d be glad to hear them.
+
+**[Open the Personality Matrix app →](https://personalitymatrix.walkerjacob.com/)**
+
+— Jacob
