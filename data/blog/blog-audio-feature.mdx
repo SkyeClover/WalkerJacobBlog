@@ -1,0 +1,30 @@
+---
+title: 'Listen to blog posts: I added audio'
+date: '2026-03-15'
+tags: ['meta', 'blog']
+draft: false
+summary: 'Blog posts can now include an optional audio version so you can listen instead of read. Here’s what I built and how it works.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Listen to blog posts: I added audio
+
+I added an optional **audio** version for blog posts. If a post has one, you’ll see a “Listen to this post” player at the top and can hear the post read aloud instead of (or while) reading.
+
+## What I built
+
+The feature went in on **March 10, 2026**. Here’s the gist:
+
+- **Per-post audio** – Any post can have an `audioUrl` in its frontmatter. When present, the layout shows a simple audio player (“Listen to this post”) so readers can play a voice recording of the post.
+- **Same content, two formats** – The audio is a reading of the post; the full text stays on the page, so it’s still accessible and indexable as before.
+- **Upload flow** – I set up a private upload page at `/blog/upload-audio` that sends files to Vercel Blob (no 4.5 MB request limit). Uploads are protected by a secret (`BLOG_AUDIO_UPLOAD_SECRET`). After uploading, I copy the blob URL and add it to the post’s frontmatter as `audioUrl`.
+- **Layout support** – The `BlogAudioPlayer` is wired into all my blog layouts (PostLayout, PostSimple, PostBanner), so audio appears consistently whether the post uses a simple layout or a banner.
+
+So: I record a reading of a post, upload it, drop the URL into frontmatter, and that post gets a “Listen to this post” block. No change to how I write the post otherwise.
+
+## Why audio
+
+Some people prefer listening, or want to multitask. Having an optional audio version doesn’t replace the text; it just gives another way to consume it. I kept the implementation minimal: one player component, one upload page, and a single frontmatter field.
+
+If you’re reading this on the site and see the player at the top, you can try it. If not, I might add an audio version for this post later. Either way, that’s the “audio thingy” I added—built March 10, blogged today.
