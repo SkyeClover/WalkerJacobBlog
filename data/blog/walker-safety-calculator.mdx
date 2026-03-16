@@ -1,0 +1,43 @@
+---
+title: 'Walker Safety Calculator'
+date: '2026-03-16'
+tags: ['development', 'project']
+draft: false
+summary: 'A Python app for artillery safety zones using Table G—Point-to-Point, OpArea, and Firing Point methods. Originally created November 16, 2025; now published with the web UI.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Walker Safety Calculator
+
+I originally created the Walker Safety Calculator on **November 16, 2025**. I’ve now published it with the **web UI front end**—this post marks that release.
+
+[**Try the Walker Safety Calculator →**](https://walker-safety-calculator.vercel.app/)
+
+## What It Does
+
+The Walker Safety Calculator computes **safety zones for artillery operations** using **M28A1/A2 (Combined) Safety data from Table G**. It produces Surface Danger Zones (SDZ), Target Selection Boxes (TSB), Area F (LDA and NHA), flight corridors, and exclusion areas—all based on range to target (8,000–15,000 m) and the standard W, X, Y, and target box parameters.
+
+The app supports **three calculation methods**:
+
+- **Point-to-Point** — Direct firing point and target; simplest case for a single engagement.
+- **OpArea** — An operational area (battery center + radius) and a usable portion of the target area; accounts for battery dispersion.
+- **Firing Point** — A specific firing point with a usable portion of the target area; single firing point, flexible target zone.
+
+Inputs are **MGRS** (Military Grid Reference System); internal math uses WGS84 geodesics and local XY for geometry (line intersections, arcs). You enter firing point, target (or battery center + usable portion corners), and method-specific options, plus shared values like LDA distance, NHA distance, and exclusion areas. The backend returns full geometry; the **web UI** shows a summary, debug output, and a **Leaflet map** with SDZ, TSB, LDA, corridors, and markers.
+
+## Two Interfaces
+
+The calculator has two interfaces:
+
+- **Desktop GUI** — A tkinter app for local use.
+- **Web front end (webskin)** — A single-page browser UI that talks to a **Flask** backend. The deployed app uses this: one HTML page with inline CSS/JS and Leaflet for the map, no build step. You pick the method, fill in MGRS and distances, click Calculate, and view results and the map.
+
+So the “release” I’m referring to is the **published web UI** at [walker-safety-calculator.vercel.app](https://walker-safety-calculator.vercel.app/)—same Python core and Table G logic, now usable from the browser with a map and clear summary/debug views.
+
+## Tech Snapshot
+
+- **Backend**: Python, Flask, pyproj (WGS84 geodesics), MGRS conversion, Table G lookup, and shared geometry utilities (ray-segment and line-line intersection, arc generation).
+- **Web**: One HTML page, vanilla JS, Leaflet (CDN); `POST /api/calculate` sends method + inputs and returns full result plus debug output for the map and tabs.
+
+If you’re working with artillery safety data or Table G and want a reference implementation or a quick way to run the three methods and see geometry on a map, the [Walker Safety Calculator](https://walker-safety-calculator.vercel.app/) is available to use and explore.

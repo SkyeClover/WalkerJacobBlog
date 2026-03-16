@@ -16,6 +16,11 @@ const projectsData: Project[] = [
     description: `A modern web application for AFATDS operators to manage ammunition tracking, launcher assignments, and report generation. Built with React, TypeScript, and Vite to streamline artillery operations.`,
     href: 'https://fdc-tracking-app.vercel.app/',
   },
+  {
+    title: 'Walker Safety Calculator',
+    description: `A Python application that calculates artillery safety zones using M28A1/A2 (Table G) data. Supports three methods—Point-to-Point, OpArea, and Firing Point—with MGRS input, SDZ/TSB/Area F geometry, and a browser-based UI backed by Flask.`,
+    href: 'https://walker-safety-calculator.vercel.app/',
+  },
 ]
 
 export default projectsData
