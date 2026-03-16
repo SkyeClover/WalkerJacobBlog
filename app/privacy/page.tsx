@@ -20,14 +20,15 @@ export default function PrivacyPage() {
         </div>
         <div className="prose dark:prose-invert max-w-none pt-8 pb-12">
           <p>
-            This privacy policy applies to walkerjacob.com (the blog) and personalitymatrix.walkerjacob.com
-            (the Personality Matrix daily check-in app), and any related tools or features on these sites.
+            This privacy policy applies to walkerjacob.com (the blog) and
+            personalitymatrix.walkerjacob.com (the Personality Matrix daily check-in app), and any
+            related tools or features on these sites.
           </p>
 
           <h2 className="mt-8 text-2xl font-bold">We do not collect personal data</h2>
           <p>
-            We do not collect, store, or transmit your personal data. The Personality Matrix app
-            and any associated tools are designed to run without requiring you to provide personal
+            We do not collect, store, or transmit your personal data. The Personality Matrix app and
+            any associated tools are designed to run without requiring you to provide personal
             information to us.
           </p>
 

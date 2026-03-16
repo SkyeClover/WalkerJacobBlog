@@ -20,8 +20,9 @@ export default function TermsPage() {
         </div>
         <div className="prose dark:prose-invert max-w-none pt-8 pb-12">
           <p>
-            These terms apply to your use of walkerjacob.com (the blog) and personalitymatrix.walkerjacob.com
-            (the Personality Matrix daily check-in app), and any related tools or features on these sites.
+            These terms apply to your use of walkerjacob.com (the blog) and
+            personalitymatrix.walkerjacob.com (the Personality Matrix daily check-in app), and any
+            related tools or features on these sites.
           </p>
 
           <h2 className="mt-8 text-2xl font-bold">Use of the sites</h2>
@@ -52,9 +53,9 @@ export default function TermsPage() {
 
           <h2 className="mt-8 text-2xl font-bold">Changes</h2>
           <p>
-            We may update these terms from time to time. The “Last updated” date at the top
-            reflects the most recent change. Continued use of these sites after changes
-            constitutes acceptance of the updated terms.
+            We may update these terms from time to time. The “Last updated” date at the top reflects
+            the most recent change. Continued use of these sites after changes constitutes
+            acceptance of the updated terms.
           </p>
 
           <h2 className="mt-8 text-2xl font-bold">Contact</h2>
