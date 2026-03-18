@@ -77,6 +77,12 @@ export default async function WatchVideoPage(props: { params: Promise<{ slug: st
 
         <div className="flex flex-wrap justify-center gap-4 text-sm">
           <Link
+            href="/videos"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+          >
+            All videos
+          </Link>
+          <Link
             href={`/blog/${post.slug}`}
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
           >
