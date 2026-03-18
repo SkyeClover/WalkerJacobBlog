@@ -10,6 +10,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import BlogAudioPlayer from '@/components/BlogAudioPlayer'
+import BlogVideoPlayer from '@/components/BlogVideoPlayer'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -31,7 +32,18 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, audioUrl } = content
+  const {
+    filePath,
+    path,
+    slug,
+    date,
+    title,
+    tags,
+    audioUrl,
+    videoUrl,
+    videoPoster,
+    videoCaptionsUrl,
+  } = content
   const basePath = path.split('/')[0]
 
   return (
@@ -95,6 +107,17 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
+              {videoUrl && (
+                <div className="pt-6">
+                  <BlogVideoPlayer
+                    src={videoUrl}
+                    title={title}
+                    poster={videoPoster}
+                    captionsSrc={videoCaptionsUrl}
+                    watchHref={`/watch/${slug}`}
+                  />
+                </div>
+              )}
               {audioUrl && (
                 <div className="pt-6">
                   <BlogAudioPlayer src={audioUrl} title={title} />

@@ -1,0 +1,35 @@
+---
+title: 'Newsletter on the site: Buttondown embed (no API key)'
+date: '2026-03-17'
+tags: ['blog']
+draft: false
+summary: 'I wired my homepage—and any post—to a simple email signup that posts straight to Buttondown. No server secret required for that path.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Newsletter on the site: Buttondown embed (no API key)
+
+I wanted people to subscribe to updates without standing up custom backend logic for the common case. The homepage subscribe box—and an optional in-post form—use **Buttondown’s hosted embed**: the browser submits the email to Buttondown’s URL, not through my API.
+
+## What visitors see
+
+On the **homepage**, there’s a block where you enter an email and hit Subscribe. Same idea as dropping Buttondown’s snippet on any static site: it’s their form endpoint, their deliverability, their double opt-in flow if you configure it there.
+
+In **blog posts**, I can drop the same thing anywhere in MDX with the `ButtondownEmbedForm` component (and an optional title prop). Handy for long posts or landing-style pages where I want a subscribe call-to-action mid-scroll.
+
+The small “Powered by Buttondown” line points at my newsletter on their side—transparent, and I’m fine with that for how little code this path costs.
+
+## Why this path first
+
+- **No `BUTTONDOWN_API_KEY` on the server** for embed signups—the form `action` is `https://buttondown.com/api/emails/embed-subscribe/<username>`.
+- **Less to break** – Fewer moving parts than proxying subscriptions through my Next app.
+- **Buttondown as source of truth** – List management, sends, and compliance settings stay in one dashboard.
+
+The username comes from site config (`buttondownEmbedUsername` in `siteMetadata`). If that’s unset, the embed simply doesn’t render, so I’m not shipping half-configured forms.
+
+## When this isn’t enough
+
+If I want Pliny’s **`BlogNewsletterForm`** (AJAX-style submit through my app), that’s a different path—it hits `/api/newsletter` and needs an API key. I wrote that up in a follow-up post so this one stays reader- and product-focused.
+
+If you’re on the site and see the subscribe area on the home page, that’s the embed flow. Simple subscribe, no secrets on my side for that button.

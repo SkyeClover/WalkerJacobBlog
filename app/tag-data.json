@@ -1,4 +1,8 @@
 {
   "professional": 1,
-  "hobbies": 2
+  "blog": 4,
+  "development": 8,
+  "project": 6,
+  "devlog": 2,
+  "game-design": 2
 }

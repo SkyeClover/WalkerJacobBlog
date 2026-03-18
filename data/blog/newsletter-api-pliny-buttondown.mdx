@@ -1,0 +1,36 @@
+---
+title: 'Newsletter API route: Pliny + Buttondown in MDX'
+date: '2026-03-17'
+tags: ['blog', 'development']
+draft: false
+summary: 'How `/api/newsletter` and BlogNewsletterForm hook into Buttondown with an API key—and when to use that instead of the embed.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Newsletter API route: Pliny + Buttondown in MDX
+
+The **homepage embed** posts emails straight to Buttondown. For **in-MDX** subscribe flows that go through my Next app, I use Pliny’s **`BlogNewsletterForm`**, backed by **`/api/newsletter`** and Buttondown’s API.
+
+## Stack
+
+- **`app/api/newsletter/route.ts`** – Exports GET/POST from Pliny’s `NewsletterAPI`, with `provider: 'buttondown'` (driven by `siteMetadata.newsletter.provider`).
+- **`BlogNewsletterForm`** – Registered in `MDXComponents` so any post can include that component in MDX.
+- **Env** – `BUTTONDOWN_API_KEY` (see `.env.example`). Without it, this path isn’t useful; the embed path on the home page still works without the key.
+
+## Embed vs API-backed form
+
+| | **ButtondownEmbedForm** | **BlogNewsletterForm** + `/api/newsletter` |
+|--|-------------------------|------------------------------|
+| Submit target | Buttondown embed URL (browser) | `POST /api/newsletter` → Buttondown |
+| API key | Not required | Required (`BUTTONDOWN_API_KEY`) |
+| UX | Full page navigation on submit (typical HTML form) | Pliny’s client-side handling |
+
+I use the **embed** for the main site CTA and anywhere I want zero server coupling. I use **BlogNewsletterForm** when I want the Pliny newsletter component behavior inside a post or page.
+
+## Config touchpoints
+
+- **`data/siteMetadata.js`** – `newsletter.provider: 'buttondown'` for the API route; `buttondownEmbedUsername` for the embed (independent concerns).
+- **`.env.example`** – Documents that the key is only for the API/MDX form path.
+
+That’s the plumbing: one provider in config, two subscribe surfaces depending on whether the browser talks to Buttondown directly or through my route.

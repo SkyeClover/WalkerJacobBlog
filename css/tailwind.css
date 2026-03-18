@@ -173,3 +173,9 @@ input:-webkit-autofill:focus {
   display: inline-block;
   vertical-align: middle;
 }
+
+.blog-video-player video::cue {
+  background: rgb(0 0 0 / 75%);
+  color: #fff;
+  line-height: 1.4;
+}

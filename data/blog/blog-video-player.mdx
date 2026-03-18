@@ -1,0 +1,41 @@
+---
+title: 'Blog video: player, watch page, and Blob uploads'
+date: '2026-03-17'
+tags: ['blog', 'development']
+draft: false
+summary: 'Self-hosted post videos with captions, a dedicated watch URL for sharing, and a secret-protected upload flow to Vercel Blob.'
+authors: ['default']
+layout: PostLayout
+---
+
+# Blog video: player, watch page, and Blob uploads
+
+After audio on posts, I added **optional video** the same way: frontmatter points at files on Vercel Blob, and layouts show a player at the top of the article. I also added a **full-page watch URL** for sharing and Open Graph video metadata, plus an **upload tool** for big files.
+
+## What I built
+
+**Frontmatter** (Contentlayer / blog schema):
+
+- **`videoUrl`** – Required for video; MP4/WebM/etc.
+- **`videoPoster`** – Optional thumbnail.
+- **`videoCaptionsUrl`** – Optional WebVTT for captions.
+
+**`BlogVideoPlayer`** – Custom controls (play/pause, seek, mute, fullscreen), optional **captions** with a toggle that remembers preference in `localStorage`. Supports **`embedded`** (in-post) and **`featured`** (larger layout on the dedicated watch page).
+
+**`/watch/[slug]`** – If a post has `videoUrl`, you get a route like `/watch/my-post-slug` with the featured player, links back to the full post and the blog index. Metadata uses **Open Graph video** so link previews can reflect the video/poster when platforms support it.
+
+**Uploads** – Private page at **`/blog/upload-video`**. Client uploads go through **`/api/blog-video/upload`** (Vercel Blob `handleUpload`). Only requests with header matching **`BLOG_VIDEO_UPLOAD_SECRET`** are allowed; blob pathnames must start with **`blog-video/`**. Same Blob token env as audio (`BLOB_READ_WRITE_TOKEN` or alias). Supports **video files** and **`.vtt`** captions.
+
+**Layouts** – Like audio, video is wired into **PostLayout**, **PostSimple**, and **PostBanner** so any layout can show video consistently.
+
+## Why
+
+Some posts are easier to follow as video; hosting on Blob avoids huge Git repos and Vercel’s serverless body limits. The watch page gives a clean share link without the full article chrome. Captions keep it more accessible.
+
+## Flow in practice
+
+1. Upload video (and optional `.vtt`) at `/blog/upload-video` with the secret.
+2. Paste URLs into the post’s frontmatter.
+3. Deploy; the post shows the player, and `/watch/<slug>` works for that post.
+
+That’s the video stack end to end—player, share URL, and upload pipeline.

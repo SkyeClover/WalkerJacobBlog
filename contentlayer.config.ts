@@ -111,6 +111,12 @@ export const Blog = defineDocumentType(() => ({
     canonicalUrl: { type: 'string' },
     /** Optional URL to an audio recording (e.g. you reading the post). Shown at top of post. */
     audioUrl: { type: 'string' },
+    /** Optional URL to a self-hosted video recording shown at top of post. */
+    videoUrl: { type: 'string' },
+    /** Optional poster image URL for the self-hosted post video. */
+    videoPoster: { type: 'string' },
+    /** Optional WebVTT captions URL for the post video. */
+    videoCaptionsUrl: { type: 'string' },
   },
   computedFields: {
     ...computedFields,

@@ -9,6 +9,7 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import BlogAudioPlayer from '@/components/BlogAudioPlayer'
+import BlogVideoPlayer from '@/components/BlogVideoPlayer'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -18,7 +19,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title, audioUrl } = content
+  const { path, slug, date, title, audioUrl, videoUrl, videoPoster, videoCaptionsUrl } = content
 
   return (
     <SectionContainer>
@@ -42,6 +43,17 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:divide-y-0 dark:divide-gray-700">
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
+              {videoUrl && (
+                <div className="pt-6">
+                  <BlogVideoPlayer
+                    src={videoUrl}
+                    title={title}
+                    poster={videoPoster}
+                    captionsSrc={videoCaptionsUrl}
+                    watchHref={`/watch/${slug}`}
+                  />
+                </div>
+              )}
               {audioUrl && (
                 <div className="pt-6">
                   <BlogAudioPlayer src={audioUrl} title={title} />

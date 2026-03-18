@@ -1,5 +1,6 @@
 import TOCInline from 'pliny/ui/TOCInline'
 import Pre from 'pliny/ui/Pre'
+import ButtondownEmbedForm from '@/components/ButtondownEmbedForm'
 import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
 import type { MDXComponents } from 'mdx/types'
 import Image from './Image'
@@ -13,4 +14,5 @@ export const components: MDXComponents = {
   pre: Pre,
   table: TableWrapper,
   BlogNewsletterForm,
+  ButtondownEmbedForm,
 }

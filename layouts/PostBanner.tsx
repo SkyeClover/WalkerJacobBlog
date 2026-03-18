@@ -10,6 +10,7 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import BlogAudioPlayer from '@/components/BlogAudioPlayer'
+import BlogVideoPlayer from '@/components/BlogVideoPlayer'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -19,7 +20,7 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
-  const { slug, title, images, audioUrl } = content
+  const { slug, title, images, audioUrl, videoUrl, videoPoster, videoCaptionsUrl } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
 
@@ -40,6 +41,17 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
+          {videoUrl && (
+            <div className="pb-6">
+              <BlogVideoPlayer
+                src={videoUrl}
+                title={title}
+                poster={videoPoster}
+                captionsSrc={videoCaptionsUrl}
+                watchHref={`/watch/${slug}`}
+              />
+            </div>
+          )}
           {audioUrl && (
             <div className="pb-6">
               <BlogAudioPlayer src={audioUrl} title={title} />

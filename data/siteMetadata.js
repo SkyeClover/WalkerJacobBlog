@@ -50,8 +50,9 @@ const siteMetadata = {
     // },
   },
   newsletter: {
-    // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus, beehive
-    // Please add your .env file and modify it according to your selection
+    // Homepage uses Buttondown embed (no API key). Username = your newsletter slug in the embed URL.
+    buttondownEmbedUsername: 'jacobwalker',
+    // For MDX <BlogNewsletterForm /> only: API route + BUTTONDOWN_API_KEY. Omit embed username to use Pliny form instead.
     provider: 'buttondown',
   },
   // Only true when Giscus env vars are set (see .env.example)
