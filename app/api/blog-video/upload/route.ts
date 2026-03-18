@@ -1,5 +1,6 @@
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
 import { NextResponse } from 'next/server'
+import { getBlobReadWriteToken } from '@/lib/blob-token'
 
 const UPLOAD_SECRET_HEADER = 'x-blog-video-secret'
 
@@ -27,9 +28,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     )
   }
 
-  const blobToken = (
-    process.env.BLOB_READ_WRITE_TOKEN ?? process.env.blog_recording_READ_WRITE_TOKEN
-  )?.trim()
+  const blobToken = getBlobReadWriteToken()
   if (!blobToken) {
     return NextResponse.json(
       {
