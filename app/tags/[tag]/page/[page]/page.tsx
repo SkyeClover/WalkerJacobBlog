@@ -48,6 +48,8 @@ export default async function TagPage(props: { params: Promise<{ tag: string; pa
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
       title={title}
+      listBasePath={`tags/${params.tag}`}
+      currentTagSlug={tag}
     />
   )
 }

@@ -17,9 +17,9 @@ const projectsData: Project[] = [
     href: 'https://da6-form-generator.vercel.app/',
   },
   {
-    title: 'FDC Tracking App',
+    title: 'Walker Track',
     description: `A modern web application for AFATDS operators to manage ammunition tracking, launcher assignments, and report generation. Built with React, TypeScript, and Vite to streamline artillery operations.`,
-    href: 'https://fdc-tracking-app.vercel.app/',
+    href: 'https://walkertrack.walkerjacob.com/',
   },
   {
     title: 'Walker Safety Calculator',

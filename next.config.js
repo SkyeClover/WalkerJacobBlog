@@ -93,6 +93,15 @@ module.exports = () => {
         },
       ]
     },
+    async redirects() {
+      return [
+        {
+          source: '/blog/fdc-tracker-prototype',
+          destination: '/blog/walkertrack-devlog-1',
+          permanent: true,
+        },
+      ]
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,

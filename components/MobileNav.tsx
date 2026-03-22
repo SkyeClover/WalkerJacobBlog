@@ -2,23 +2,25 @@
 
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-import { Fragment, useState, useEffect, useRef } from 'react'
+import { Fragment, useState, useEffect, useRef, useTransition } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
   const navRef = useRef(null)
+  const [, startTransition] = useTransition()
 
   const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        enableBodyScroll(navRef.current)
-      } else {
-        // Prevent scrolling
-        disableBodyScroll(navRef.current)
-      }
-      return !status
+    startTransition(() => {
+      setNavShow((status) => {
+        if (status) {
+          enableBodyScroll(navRef.current)
+        } else {
+          disableBodyScroll(navRef.current)
+        }
+        return !status
+      })
     })
   }
 
